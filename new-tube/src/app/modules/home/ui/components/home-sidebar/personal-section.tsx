@@ -2,8 +2,11 @@
 import { FlameIcon, HomeIcon, HistoryIcon, PlaySquareIcon, ClockIcon, ThumbsUpIcon, SettingsIcon, FlagIcon, HelpCircleIcon, MessageSquareIcon, ListVideoIcon } from 'lucide-react'
 import { SidebarGroup, SidebarGroupContent, SidebarMenuButton, SidebarMenuItem, SidebarGroupLabel, SidebarMenu } from '@/components/ui/sidebar'
 import Link from 'next/link'
+import { useUser, useClerk } from '@clerk/nextjs'
 
 const PersonalSection = () => {
+    const { isSignedIn } = useUser()
+    const { openSignIn } = useClerk()
     const mainItems = [
         {
             title: 'History',
@@ -40,6 +43,13 @@ const PersonalSection = () => {
                              <SidebarMenuButton 
                                 asChild 
                                 tooltip={item.title}
+                                onClick={(e) => {
+                                    if (!isSignedIn && item.auth) {
+                                       e.preventDefault()           
+                                       e.stopPropagation()
+                                       return openSignIn();
+                                    }  
+                                }}
                                 className="hover:bg-gray-100 rounded-lg mx-3 mb-2 group-data-[collapsible=icon]:mx-auto group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:h-10"
                              >
                                 <Link href={item.href} className='flex items-center gap-6 px-3 py-2 group-data-[collapsible=icon]:px-0 group-data-[collapsible=icon]:w-10 group-data-[collapsible=icon]:h-10 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:gap-0'>

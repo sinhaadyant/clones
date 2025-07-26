@@ -30,8 +30,7 @@ const HomeNavbar = () => {
               
               {/* Actions */}
               <div className='flex items-center gap-2 md:gap-4 flex-shrink-0'>
-                <BellIcon className='size-6 text-gray-600 cursor-pointer hover:text-gray-800 p-2 hover:bg-gray-100 rounded-full transition-colors' />
-                <AuthButton />
+                 <AuthButton />
               </div>
         </div>
     </nav>
