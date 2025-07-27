@@ -5,6 +5,7 @@ import Image from 'next/image'
 import SearchInput from './SearchInput'
 import { BellIcon } from 'lucide-react'
 import AuthButton from '@/app/modules/auth/ui/components/auth-button'
+import { UsernameDisplay } from '@/components/username-display'
 
 const HomeNavbar = () => {
   return (
@@ -30,6 +31,7 @@ const HomeNavbar = () => {
               
               {/* Actions */}
               <div className='flex items-center gap-2 md:gap-4 flex-shrink-0'>
+                 
                  <AuthButton />
               </div>
         </div>
