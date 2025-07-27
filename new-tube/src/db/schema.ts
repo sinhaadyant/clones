@@ -12,3 +12,13 @@ export const users = pgTable("users", {
     uniqueIndex("clerk_id_idx").on(t.clerkId),
     uniqueIndex("email_idx").on(t.email),
 ])      
+
+export const categories = pgTable("categories", {
+    id: uuid("id").primaryKey().defaultRandom(),
+    name: text("name").notNull(),
+    description: text("description"),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+},(t)=>[
+    uniqueIndex("name_idx").on(t.name),
+])

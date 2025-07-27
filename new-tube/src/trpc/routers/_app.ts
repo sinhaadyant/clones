@@ -5,20 +5,11 @@ import { users } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { currentUser } from '@clerk/nextjs/server';
 import { TRPCError } from '@trpc/server';
+import { categoriesRouter } from '../../modules/categories/server/procedures';
 
 export const appRouter = router({
-  hello: procedure
-    .input(
-      z.object({
-        text: z.string(),
-      }),
-    )
-    .query((opts) => {
-      return {
-        greeting: `hello ${opts.input.text}`,
-      };
-    }),
-
+  categories: categoriesRouter, 
+   
   // User procedures
   user: router({
     // Get current user from database

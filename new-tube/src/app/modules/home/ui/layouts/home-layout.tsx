@@ -16,10 +16,8 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
                 <HomeSidebar />
                 
                 {/* Main Content */}
-                <main className='flex-1 overflow-y-auto bg-gray-50 min-h-[calc(100vh-4rem)]'>
-                    <div className='p-4 md:p-6 max-w-full'>
-                        {children}
-                    </div>
+                <main className='flex-1 overflow-y-auto bg-gray-50 max-w-full'>
+                        {children} 
                 </main>
             </div>
         </div>

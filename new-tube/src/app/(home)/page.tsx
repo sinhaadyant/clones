@@ -1,27 +1,40 @@
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import React from 'react'
-import { SignedIn } from '@clerk/nextjs'
-import { UsernameDisplay } from '@/components/username-display'
+import React, { Suspense } from "react";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { HydrateClient } from "@/trpc/hydrate-client";
+import { ErrorBoundary } from "@/components/error-boundary";
+import Client from "./client";
 
 const Page = (): React.JSX.Element => {
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-center gap-4">
-        <Image src="/logo.png" alt="logo" width={100} height={100} />
-        <div>
-          <p className='text-xl font-bold tracking-tight'>Hello World</p>
-          <UsernameDisplay />
-        </div>
-      </div>
-
+    <div className="w-full">
       <SignedIn>
-        <div className="text-center text-gray-600">
-          <p>Welcome! You are successfully signed in.</p>
-        </div>
+        <HydrateClient>
+          <ErrorBoundary
+            fallback={
+              <div className="p-4 text-red-600">Failed to load content</div>
+            }
+          >
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center p-8">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                  <span className="ml-2 text-gray-600">Loading...</span>
+                </div>
+              }
+            >
+              <Client />
+            </Suspense>
+          </ErrorBoundary>
+        </HydrateClient>
       </SignedIn>
-    </div>
-  )
-}
 
-export default Page
+      <SignedOut>
+        <div className="p-6">
+          <SignInButton />
+        </div>
+      </SignedOut>
+    </div>
+  );
+};
+
+export default Page;

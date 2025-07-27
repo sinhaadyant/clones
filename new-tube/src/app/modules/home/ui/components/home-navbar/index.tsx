@@ -1,11 +1,8 @@
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import Link from 'next/link'
-import React from 'react'
 import Image from 'next/image'
 import SearchInput from './SearchInput'
-import { BellIcon } from 'lucide-react'
 import AuthButton from '@/app/modules/auth/ui/components/auth-button'
-import { UsernameDisplay } from '@/components/username-display'
 
 const HomeNavbar = () => {
   return (
