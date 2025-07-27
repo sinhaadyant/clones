@@ -1,15 +1,16 @@
+import { CategorySection } from '@/app/modules/home/ui/sections/category-section';
 import React from 'react'
-
-const HomeView = () => {
+ import { Suspense } from 'react'
+interface HomeViewProps {
+  categoryId?: string;
+}
+const HomeView = ({ categoryId }: HomeViewProps) => {
   return (
     <div className="w-full min-h-screen bg-white">
-      <div className="max-w-full mx-auto">
-        <div className="p-4">
-          <h1 className="text-2xl font-bold mb-4">Home View - Full Width</h1>
-          <div className="w-full h-20 bg-gray-100 rounded-lg flex items-center justify-center">
-            <span className="text-gray-600">This container takes full width</span>
-          </div>
-        </div>
+      <div className="max-w-[2400px] mx-auto mb-10 px-4 pt-2.5 flex flex-col gap-y-6 ">
+         <Suspense fallback={<div>Loading...</div>}>
+            <CategorySection categoryId={categoryId} />
+         </Suspense>
       </div>
     </div>
   )
