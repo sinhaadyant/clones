@@ -18,7 +18,7 @@ const StudioSidebarHeader = () => {
       </div>
     );
   if (state === "collapsed") return (  
-    <SidebarMenuItem>
+    <SidebarMenuItem className="mb-2">
         <SidebarMenuButton
             asChild
         >

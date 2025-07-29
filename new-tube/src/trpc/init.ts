@@ -1,11 +1,29 @@
 import { initTRPC } from '@trpc/server';
 import { auth } from '@clerk/nextjs/server';
+import { db } from '@/db';
+import { users } from '@/db/schema';
+import { eq } from 'drizzle-orm';
 
 // Create context function
 export const createTRPCContext = async () => {
-  const { userId } = await auth();
+  const { userId, sessionId } = await auth();
+  
+  let user = null;
+  if (userId) {
+    // Get user data from database
+    const userData = await db
+      .select()
+      .from(users)
+      .where(eq(users.clerkId, userId))
+      .limit(1);
+    
+    user = userData[0] || null;
+  }
+
   return {
     userId,
+    sessionId,
+    user, // Database user object with UUID
   };
 };
 

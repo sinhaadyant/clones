@@ -6,10 +6,13 @@ import { eq } from 'drizzle-orm';
 import { currentUser } from '@clerk/nextjs/server';
 import { TRPCError } from '@trpc/server';
 import { categoriesRouter } from '../../modules/categories/server/procedures';
+import { studioRouter } from '@/app/modules/studio/server/procedure';
+import { videoRouter } from '@/app/modules/videos/server/procedure';
 
 export const appRouter = router({
   categories: categoriesRouter, 
-   
+  studio: studioRouter,
+  videos: videoRouter,
   // User procedures
   user: router({
     // Get current user from database
